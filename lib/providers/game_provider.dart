@@ -9,6 +9,10 @@ final highestLevelProvider = StateProvider<int>((ref) {
   return StorageService.getHighestLevel();
 });
 
+final hardModeProvider = StateProvider<bool>((ref) {
+  return StorageService.getHardMode();
+});
+
 final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
   final startLevel = ref.read(highestLevelProvider);
   return GameNotifier(startLevel, ref);

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../models/app_theme.dart';
+import '../providers/game_provider.dart';
 import '../providers/theme_provider.dart';
 import '../services/haptics.dart';
 import '../services/storage_service.dart';
@@ -26,6 +27,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     final currentTheme = ref.watch(themeProvider);
+    final hardMode = ref.watch(hardModeProvider);
 
     return Scaffold(
       backgroundColor: currentTheme.background,
@@ -126,25 +128,56 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   ),
                 ],
               ),
-              child: SwitchListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 4,
-                ),
-                title: Text(
-                  'Haptic Feedback',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w800,
-                    fontSize: 16,
-                    color: currentTheme.textPrimary,
+              child: Column(
+                children: [
+                  SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 4,
+                    ),
+                    title: Text(
+                      'Haptic Feedback',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                        color: currentTheme.textPrimary,
+                      ),
+                    ),
+                    value: _hapticEnabled,
+                    activeThumbColor: currentTheme.switchActiveColor,
+                    onChanged: (value) {
+                      setState(() => _hapticEnabled = value);
+                      StorageService.setHapticEnabled(value);
+                    },
                   ),
-                ),
-                value: _hapticEnabled,
-                activeThumbColor: currentTheme.switchActiveColor,
-                onChanged: (value) {
-                  setState(() => _hapticEnabled = value);
-                  StorageService.setHapticEnabled(value);
-                },
+                  Divider(
+                    height: 1,
+                    thickness: 1,
+                    indent: 20,
+                    endIndent: 20,
+                    color: currentTheme.border.withValues(alpha: 0.2),
+                  ),
+                  SwitchListTile(
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 4,
+                    ),
+                    title: Text(
+                      'Hard Mode',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        fontSize: 16,
+                        color: currentTheme.textPrimary,
+                      ),
+                    ),
+                    value: hardMode,
+                    activeThumbColor: currentTheme.switchActiveColor,
+                    onChanged: (value) {
+                      StorageService.setHardMode(value);
+                      ref.read(hardModeProvider.notifier).state = value;
+                    },
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 28),

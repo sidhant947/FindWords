@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum AppThemeId { system, clean, dark, forest, ocean, sunset }
+enum AppThemeId { system, clean, dark, amoled, forest, ocean, sunset }
 
 class AppThemeData {
   final AppThemeId id;
@@ -237,6 +237,42 @@ class AppThemes {
     switchActiveColor: Color(0xFF10B981),
   );
 
+  static const amoled = AppThemeData(
+    id: AppThemeId.amoled,
+    name: 'AMOLED Dark',
+    background: Color(0xFF000000),
+    surface: Color(0xFF121212),
+    surfaceVariant: Color(0xFF1E1E1E),
+    border: Color(0xFF333333),
+    textPrimary: Color(0xFFFFFFFF),
+    textMuted: Color(0xFFA1A1AA),
+    appBarFg: Color(0xFFFFFFFF),
+    playBg: Color(0xFF10B981),
+    playBorder: Color(0xFF047857),
+    playShadow: Color(0xFF064E3B),
+    randomBg: Color(0xFFF59E0B),
+    randomBorder: Color(0xFFB45309),
+    randomShadow: Color(0xFF78350F),
+    levelsBg: Color(0xFF3B82F6),
+    levelsBorder: Color(0xFF1D4ED8),
+    levelsShadow: Color(0xFF1E3A8A),
+    settingsBg: Color(0xFF8B5CF6),
+    settingsBorder: Color(0xFF6D28D9),
+    settingsShadow: Color(0xFF4C1D95),
+    levelCurrent: Color(0xFF10B981),
+    levelCurrentBorder: Color(0xFF047857),
+    levelCurrentShadow: Color(0xFF064E3B),
+    levelNormal: Color(0xFF3B82F6),
+    levelNormalBorder: Color(0xFF1D4ED8),
+    levelNormalShadow: Color(0xFF1E3A8A),
+    levelLocked: Color(0xFF18181B),
+    levelLockedBorder: Color(0xFF27272A),
+    levelLockedIcon: Color(0xFF52525B),
+    cardBg: Color(0xFF000000),
+    dialogBg: Color(0xFF000000),
+    switchActiveColor: Color(0xFF10B981),
+  );
+
   static const forest = AppThemeData(
     id: AppThemeId.forest,
     name: 'Forest',
@@ -381,7 +417,7 @@ class AppThemes {
     switchActiveColor: Color(0xFF10B981),
   );
 
-  static const all = [system, clean, dark, forest, ocean, sunset];
+  static const all = [system, clean, dark, amoled, forest, ocean, sunset];
 
   static AppThemeData resolve(AppThemeId id, [Brightness? platformBrightness]) {
     if (id == AppThemeId.system) {

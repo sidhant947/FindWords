@@ -4,6 +4,7 @@ class StorageService {
   static const String _keyHighLevel = 'high_level';
   static const String _keyHaptic = 'haptic_enabled';
   static const String _keyTheme = 'theme_id';
+  static const String _keyHardMode = 'hard_mode';
 
   static late SharedPreferences _prefs;
 
@@ -35,5 +36,13 @@ class StorageService {
 
   static Future<void> setThemeId(String themeId) async {
     await _prefs.setString(_keyTheme, themeId);
+  }
+
+  static bool getHardMode() {
+    return _prefs.getBool(_keyHardMode) ?? false;
+  }
+
+  static Future<void> setHardMode(bool value) async {
+    await _prefs.setBool(_keyHardMode, value);
   }
 }

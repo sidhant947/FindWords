@@ -74,6 +74,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final gameState = ref.watch(gameProvider);
     final notifier = ref.read(gameProvider.notifier);
     final appTheme = ref.watch(themeProvider);
+    final hardMode = ref.watch(hardModeProvider);
     return Scaffold(
       backgroundColor: appTheme.background,
       appBar: AppBar(
@@ -142,7 +143,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
             const SizedBox(height: 8),
             if (gameState.status == GameStatus.won)
               _buildCompletionSection(context, gameState, notifier, appTheme)
-            else
+            else if (!hardMode)
               _buildWordChips(gameState, appTheme),
             const SizedBox(height: 8),
           ],
